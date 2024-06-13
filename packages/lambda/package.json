@@ -1,0 +1,19 @@
+{
+  "name": "svc-lambdas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.138",
+    "aws-sdk": "^2.1632.0"
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^8.1.3"
+  }
+}

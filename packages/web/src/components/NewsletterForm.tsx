@@ -37,7 +37,7 @@ const NewsletterForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col w-full max-w-2xl font-body"
+      className="flex flex-col relative z-20 w-full max-w-2xl font-body"
     >
       <div className="flex md:flex-row flex-col justify-center md:items-center mb-4 p-2 md:p-0">
         <div className="flex flex-1">
@@ -57,11 +57,15 @@ const NewsletterForm = () => {
               type="radio"
               name="role"
               value={"individual"}
-              className="w-4 h-4"
+              className="w-4 h-4 cursor-pointer "
               required
+              id="user"
             />
 
-            <label htmlFor="user" className="block ml-1 font-light">
+            <label
+              htmlFor="user"
+              className="block ml-1 cursor-pointer  font-light"
+            >
               Individual
             </label>
           </div>
@@ -70,10 +74,14 @@ const NewsletterForm = () => {
               type="radio"
               name="role"
               value={"veterinarian"}
-              className="ml-4 w-4 h-4"
+              className="ml-4 w-4 h-4 cursor-pointer "
               required
+              id="veterinarian"
             />
-            <label htmlFor="veterinarian" className="block ml-1 font-light">
+            <label
+              htmlFor="veterinarian"
+              className="block  cursor-pointer ml-1 font-light"
+            >
               Vet. Clinic
             </label>
           </div>
@@ -82,7 +90,7 @@ const NewsletterForm = () => {
 
       <button
         type="submit"
-        className="flex justify-center items-center gap-4 bg-black focus:ring-opacity-50 hover:shadow-md px-4 py-3 rounded-md w-1/2 md:w-full font-thin text-white self-center focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        className="flex justify-center items-center gap-4   bg-indigo-500 hover:bg-indigo-600 focus:ring-opacity-50 hover:shadow-md px-4 py-3 rounded-md w-1/2 md:w-full font-thin text-white self-center focus:outline-none focus:ring-2 focus:ring-indigo-500"
       >
         <span>Count me in</span>
         {isSpinnerVisible && <Spinner />}

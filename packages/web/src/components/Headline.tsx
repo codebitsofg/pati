@@ -2,7 +2,7 @@ import React from "react";
 
 const Headline = () => {
   return (
-    <div className="mt-32 mb-10">
+    <div className="mt-32 relative z-40 mb-10">
       <h1 className="md:mb-0 font-lobster text-[7vh] text-center text-indigo-50 md:text-[19vh]">
         Join The List
       </h1>

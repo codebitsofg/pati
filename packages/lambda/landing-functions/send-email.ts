@@ -1,12 +1,11 @@
-import {
-  Context,
-  APIGatewayProxyResult,
-  APIGatewayEvent,
-  SQSEvent,
-} from "aws-lambda";
-import sgMail from "@sendgrid/mail";
+import { Context, APIGatewayProxyResult, SQSEvent } from "aws-lambda";
+import * as SibApiV3Sdk from "@sendinblue/client";
 
-sgMail.setApiKey(process.env.SG_API_KEY);
+const client = new SibApiV3Sdk.TransactionalEmailsApi();
+client.setApiKey(
+  SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
+  process.env.BREVO_API_KEY!
+);
 
 export const handler = async (
   event: SQSEvent,
@@ -16,17 +15,17 @@ export const handler = async (
     const { email } = JSON.parse(record.body);
 
     const msg = {
-      to: email,
-      from: "beratgenc.dev@gmail.com",
-      templateId: "d-7e4dc4aac89348c5bf1b2a045ecae516",
+      to: [{ email }],
+      sender: { email: "beratgenc.dev@gmail.com" },
+      templateId: 1,
     };
 
     try {
-      await sgMail.send(msg);
-      console.log("Email sent successfully to:", email);
+      await client.sendTransacEmail(msg);
+      console.log(email);
     } catch (error) {
-      console.error("Error sending email to:", email, error);
-      if (error.response) {
+      console.error(error);
+      if (error.response && error.response.body) {
         console.error(error.response.body);
       }
     }
@@ -35,7 +34,7 @@ export const handler = async (
   return {
     statusCode: 200,
     body: JSON.stringify({
-      message: "hello world",
+      message: "Emails processed successfully",
     }),
   };
 };
